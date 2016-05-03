@@ -16,7 +16,7 @@ Set-StrictMode -Version latest
 
 $RepoRoot = Split-Path -Parent $MyInvocation.MyCommand.Path
 Write-Verbose -Verbose "RepoRoot $($reporoot)"
-$module = 'SCSMReviewActivities'
+$module = 'SMLetsExt'
 $psVersion = $PSVersionTable.PSVersion
 Write-Verbose -Verbose "Module $($Module)"
 
