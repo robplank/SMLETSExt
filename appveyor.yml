@@ -4,12 +4,14 @@ image: WMF 5
 install:
 - ps: cinst pester
 build_script:
-- ps: New-ModuleManifest -ModuleVersion 1.0 -Path .\SMLetsExt.psd1 -Author 'Rob Plank' -Company '' -Description 'Advanced SCSM Reveiw Activity cmdlets ' -RootModule '.\SMLetsExt.psm1' -FunctionsToExport Get-SCSMActivityReviewer, Add-SCSMActivityReviewer, Remove-SCSMActivityReviewer, Update-SCSMActivityReviewer
-- ps: $content = Get-Content -Path .\SMLetsExt.psd1 -Raw -Encoding Unicode
-- ps: [System.IO.File]::writeAllText('.\test.psd1',$content, [System.Text.Encoding]::UTF8)
+- ps: >- 
+New-ModuleManifest -ModuleVersion 1.0 -Path .\SMLetsExt.psd1 -Author 'Rob Plank' -Company '' -Description 'Advanced SCSM Reveiw Activity cmdlets ' -RootModule '.\SMLetsExt.psm1' -FunctionsToExport Get-SCSMActivityReviewer, Add-SCSMActivityReviewer, Remove-SCSMActivityReviewer, Update-SCSMActivityReviewer
+$content = Get-Content -Path .\SMLetsExt.psd1 -Raw -Encoding Unicode
+[System.IO.File]::writeAllText('.\SMLetsExt.psd1',$content, [System.Text.Encoding]::UTF8)
 
 
 test_script:
-- ps: $res = Invoke-Pester -OutputFormat NUnitXml -OutputFile TestsResults.xml -PassThru -Path ".\"
-- ps: (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\TestsResults.xml))
-- ps: if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed."}
+- ps: >-
+$res = Invoke-Pester -OutputFormat NUnitXml -OutputFile TestsResults.xml -PassThru -Path ".\"
+(New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\TestsResults.xml))
+if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed."}
