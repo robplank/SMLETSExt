@@ -4,11 +4,7 @@ image: WMF 5
 install:
 - ps: cinst pester
 build_script:
-- ps: >- 
-New-ModuleManifest -ModuleVersion 1.0 -Path .\SMLetsExt.psd1 -Author 'Rob Plank' -Company '' -Description 'Advanced SCSM Reveiw Activity cmdlets ' -RootModule '.\SMLetsExt.psm1' -FunctionsToExport Get-SCSMActivityReviewer, Add-SCSMActivityReviewer, Remove-SCSMActivityReviewer, Update-SCSMActivityReviewer
-$content = Get-Content -Path .\SMLetsExt.psd1 -Raw -Encoding Unicode
-[System.IO.File]::writeAllText('.\SMLetsExt.psd1',$content, [System.Text.Encoding]::UTF8)
-
+-ps: "New-ModuleManifest -ModuleVersion 1.0 -Path .\\SMLetsExt.psd1 -Author 'Rob Plank' -Company '' -Description 'Advanced SCSM Reveiw Activity cmdlets ' -RootModule '.\\SMLetsExt.psm1' -FunctionsToExport Get-SCSMActivityReviewer, Add-SCSMActivityReviewer, Remove-SCSMActivityReviewer, Update-SCSMActivityReviewer \n$content = Get-Content -Path .\\SMLetsExt.psd1 -Raw -Encoding Unicode\n [System.IO.File]::writeAllText('.\\SMLetsExt.psd1',$content, [System.Text.Encoding]::UTF8)"
 
 test_script:
 - ps: >-
