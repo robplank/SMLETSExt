@@ -14,7 +14,7 @@ test_script:
      (New-Object 'System.Net.WebClient').UploadFile("https://ci.appveyor.com/api/testresults/nunit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path .\TestsResults.xml))
      if ($res.FailedCount -gt 0) { throw "$($res.FailedCount) tests failed."}
 on_success:
-- ps: "Install-PackageProvider -Name NuGet -Force \nPublish-Module -NuGetApiKey $env:ApiKey -Path C:\\SMLetsExt"
+- ps: "Install-PackageProvider -Name NuGet -Force \nPublish-Module -NuGetApiKey $env:ApiKey -Path C:\\SMLetsExt -Tags 'SCSM SMLETS' -ProjectUri https://github.com/robplank/SMLETSExt -LicenseUri https://github.com/robplank/SMLETSExt/blob/master/LICENSE"
 environment:
   APIKey:
     secure: yqZKS8xvPRVnYIGAPZcTLRg7AjxYnrXQl/p37e86k3B3Do15LNvAjYA7y9OjW8J0

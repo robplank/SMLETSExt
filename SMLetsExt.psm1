@@ -269,7 +269,7 @@ Function Remove-SCSMActivityReviewer
                 {
                     if($userobj.username -eq $username)
                     {
-                        $ReviewertoUserRelationship = Get-SCSMRelationshipObject -TargetObject $Userobj -TargetRelationship $ReviewerIsUser
+                        $ReviewertoUserRelationship =(Get-SCSMRelationshipObject -TargetObject $userobj -TargetRelationship $ReviewerIsUser) | where {$_.sourceobject.ID -eq $Reviewer.ID}
                         $ActivitytoReviewerRelationship = Get-SCSMRelationshipObject -TargetObject $ReviewertoUserRelationship.SourceObject -TargetRelationship $ReviewerRelationship
                         $ActivitytoReviewerRelationship | Remove-SCSMRelationshipObject
                         $ReviewertoUserRelationship | Remove-SCSMRelationshipObject 
@@ -279,7 +279,7 @@ Function Remove-SCSMActivityReviewer
                 {
                     if($user.username -eq $userobj.username)
                     {
-                        $ReviewertoUserRelationship = Get-SCSMRelationshipObject -TargetObject $Userobj -TargetRelationship $ReviewerIsUser
+                        $ReviewertoUserRelationship = $ReviewertoUserRelationship = (Get-SCSMRelationshipObject -TargetObject $userobj -TargetRelationship $ReviewerIsUser) | where {$_.sourceobject.ID -eq $Reviewer.ID}
                         $ActivitytoReviewerRelationship = Get-SCSMRelationshipObject -TargetObject $ReviewertoUserRelationship.SourceObject -TargetRelationship $ReviewerRelationship
                         $ActivitytoReviewerRelationship | Remove-SCSMRelationshipObject
                         $ReviewertoUserRelationship | Remove-SCSMRelationshipObject 
