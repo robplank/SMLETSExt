@@ -104,7 +104,7 @@ Function Add-SCSMActivityReviewer
         [Parameter(Mandatory=$false,ParameterSetName="string")]
         [string]$domain,
         [Parameter(Mandatory=$True,ParameterSetName="Object")]
-        [PSObject[]]$Useadd,
+        [PSObject[]]$Useradd,
         [Parameter(Mandatory=$True,ParameterSetName="Object")]
         [PSObject]$RActivity    
     )
